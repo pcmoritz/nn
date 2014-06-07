@@ -1261,6 +1261,41 @@ function nntest.SpatialMaxPooling()
 
 end
 
+function nntest.SpatialMedianPooling()
+   local from = math.random(1,5)
+   local ki = math.random(1,5)
+   local kj = math.random(1,5)
+   local si = math.random(1,4)
+   local sj = math.random(1,4)
+   local outi = math.random(10,20)
+   local outj = math.random(10,20)
+   local ini = (outi-1)*si+ki
+   local inj = (outj-1)*sj+kj
+
+   local module = nn.SpatialMedianPooling(ki,kj,si,sj)
+   local input = torch.rand(from,ini,inj)
+
+   local err = jac.testJacobian(module, input)
+   mytester:assertlt(err, precision, 'error on state ')
+
+   local ferr, berr = jac.testIO(module, input)
+   mytester:asserteq(ferr, 0, torch.typename(module) .. ' - i/o forward err ')
+   mytester:asserteq(berr, 0, torch.typename(module) .. ' - i/o backward err ')
+
+   -- batch
+   local nbatch = math.random(2,5)
+   input = torch.rand(nbatch,from,ini,inj)
+   module = nn.SpatialMedianPooling(ki,kj,si,sj)
+
+   local err = jac.testJacobian(module, input)
+   mytester:assertlt(err, precision, 'error on state (Batch) ')
+
+   local ferr, berr = jac.testIO(module, input)
+   mytester:asserteq(ferr, 0, torch.typename(module) .. ' - i/o forward err (Batch) ')
+   mytester:asserteq(berr, 0, torch.typename(module) .. ' - i/o backward err (Batch) ')
+
+end
+
 function nntest.SpatialLPPooling()
    local fanin = math.random(1,4)
    local osizex = math.random(1,4)
