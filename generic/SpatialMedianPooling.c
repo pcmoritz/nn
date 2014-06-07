@@ -35,11 +35,12 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
 	   in the current run ("running maximum") */
 	real maxval; 
 	long maxindex = -1;
-        long tcntr = 0;
+        long tcntr;
         int x,y;
 	printf("M: %d", M);
 	for(m = 0; m <= M; m++)
 	{
+	  tcntr = 0;
 	  maxval = -THInf;
 	  for(y = 0; y < kH; y++)
 	  {
