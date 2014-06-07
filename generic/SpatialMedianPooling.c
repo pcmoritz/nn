@@ -2,6 +2,9 @@
 #define TH_GENERIC_FILE "generic/SpatialMedianPooling.c"
 #else
 
+#pragma GCC push_options
+#pragma GCC optimize ("unroll-loops")
+
 static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *output_p,
 							 real *indx_p, real *indy_p,
 							 long nslices,
