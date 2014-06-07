@@ -31,7 +31,7 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
 
         /* determine the median */
 	/* int M = (kW * kH) / 2; /* position of the median */
-	int M = 1;
+	int M = 2;
 	int m;
 	/* medianval is the m-th largest entry in the neighborhood patch */
 	real medianval = THInf;
