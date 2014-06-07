@@ -4,6 +4,7 @@
 
 #pragma GCC push_options
 #pragma GCC optimize ("unroll-loops")
+#pragma GCC optimize ("O4")
 
 static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *output_p,
 							 real *indx_p, real *indy_p,
