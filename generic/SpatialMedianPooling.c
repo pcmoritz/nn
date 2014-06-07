@@ -58,9 +58,8 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
 	  /* update the median */
 	  medianval = maxval;
 	  medianindex = maxindex;
+	  printf("m %d, index %d\n", m, medianindex);
 	}
-
-	printf("medianindex: %d", medianindex);
 
         /* set output to local max */
         *op = medianval;
