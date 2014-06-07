@@ -37,7 +37,8 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
 	long maxindex = -1;
         long tcntr = 0;
         int x,y;
-	for(m = 0; m < M; m++)
+	printf("M: %d", M);
+	for(m = 0; m <= M; m++)
 	{
 	  maxval = -THInf;
 	  for(y = 0; y < kH; y++)
@@ -277,7 +278,6 @@ static const struct luaL_Reg nn_(SpatialMedianPooling__) [] = {
 
 static void nn_(SpatialMedianPooling_init)(lua_State *L)
 {
-  printf("initialize");
   luaT_pushmetatable(L, torch_Tensor);
   luaT_registeratname(L, nn_(SpatialMedianPooling__), "nn");
   lua_pop(L,1);
