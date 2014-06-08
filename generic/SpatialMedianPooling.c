@@ -51,7 +51,6 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
 	    for(x = 0; x < kW; x++)
 	    {
 	      real val = *(ip + y*iwidth + x);
-	      printf("%d, %d, %d\n", val, maxval, medianval);
 	      if (val > maxval && val <= medianval)
 	      {
 		if(val == medianval && tcntr > medianindex && !processed) {
