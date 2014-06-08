@@ -43,6 +43,7 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
         int x,y;
 	for(m = 0; m <= M; m++)
 	{
+	  int processed = 0;
 	  tcntr = 0;
 	  maxval = -THInf;
 	  for(y = 0; y < kH; y++)
@@ -50,11 +51,18 @@ static void nn_(SpatialMedianPooling_updateOutput_frame)(real *input_p, real *ou
 	    for(x = 0; x < kW; x++)
 	    {
 	      real val = *(ip + y*iwidth + x);
-	      printf("%f, %f, %f\n", val, maxval, medianval);
-	      if (val > maxval && val < medianval)
+	      printf("%d, %d, %d\n", val, maxval, medianval);
+	      if (val > maxval && val <= medianval)
 	      {
-		maxval = val;
-		maxindex = tcntr;
+		if(val == medianval && tcntr > medianindex && !processed) {
+		  processed = 1;
+		  maxval = val;
+		  maxindex = tcntr;
+		}
+		if(val < medianval) {
+		  maxval = val;
+		  maxindex = tcntr;
+		}
 	      }
 	      tcntr++;
 	    }
